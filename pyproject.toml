@@ -1,0 +1,72 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "doctransformers"
+version = "0.1"
+description = 'A package to train transformers models on long documents or books'
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Alexander Foltas", email = "alex.foltas@gmx.de" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "transformers",
+  "datasets",
+  "sklearn",
+  "tqdm",
+  "polars",
+  "torch",
+  "fsspec",
+  "json",
+  "posixpath",
+
+]
+
+[project.urls]
+Documentation = "https://github.com/foltasa/doctransformers#readme"
+Issues = "https://github.com/foltasa/doctransformers/issues"
+Source = "https://github.com/foltasa/doctransformers"
+
+[tool.hatch.version]
+path = "src/doctransformers/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/doctransformers tests}"
+
+[tool.coverage.run]
+source_pkgs = ["doctransformers", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/doctransformers/__about__.py",
+]
+
+[tool.coverage.paths]
+doctransformers = ["src/doctransformers", "*/doctransformers/src/doctransformers"]
+tests = ["tests", "*/doctransformers/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
